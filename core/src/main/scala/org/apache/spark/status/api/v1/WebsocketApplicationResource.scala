@@ -31,8 +31,6 @@ private[v1] class WebsocketApplicationResource extends BaseAppResource {
 
   private var session : Session = _
 
-//  private var localHistory : mutable.HashSet[LocalHistory] = new mutable.HashSet[LocalHistory]()
-
   case class LocalHistory(
     taskId: Long,
     status: String
@@ -44,30 +42,6 @@ private[v1] class WebsocketApplicationResource extends BaseAppResource {
     this.session = session
     WebsocketApplicationResource.connections += this
   }
-
-//  def sendHistoryOver(): Unit = {
-//    withUI(_.store.taskList(0)).foreach {
-//      task =>
-//        val history: LocalHistory = LocalHistory(task.taskId, task.status)
-//        localHistory.add(history)
-//        val jsonResult: String = new JacksonMessageWriter().mapper.writeValueAsString(task)
-//
-//        session.getBasicRemote.sendText(jsonResult)
-//    }
-//    /**
-//      * There's no executor where we could send the future with the 3 sec delay,
-//      * we have to sleep here.
-//      */
-//    Thread.sleep(3000)
-//    withUI(_.store.taskList(0)).foreach {
-//      task =>
-//        val history: LocalHistory = LocalHistory(task.taskId, task.status)
-//        if(!localHistory.contains(history)) {
-//          val jsonResult: String = new JacksonMessageWriter().mapper.writeValueAsString(task)
-//          session.getBasicRemote.sendText(jsonResult)
-//        }}
-//    localHistory.clear()
-//  }
 
   @OnMessage
   @throws[IOException]
@@ -83,7 +57,6 @@ private[v1] class WebsocketApplicationResource extends BaseAppResource {
 
   @OnError def onError(session: Session, throwable: Throwable): Unit = {
     // Handle error
-//    println(s"SOCKET ERROR" + throwable)
   }
 }
 
@@ -100,7 +73,7 @@ object WebsocketApplicationResource {
         try {
           endpoint.session.getBasicRemote.sendObject(jsonResult)
         } catch {
-          case e : Throwable => println(e)
+          case e : Throwable => endpoint.session.getBasicRemote.sendObject(jsonResult)
         }
       }
     })
