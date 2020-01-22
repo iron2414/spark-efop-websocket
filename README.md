@@ -1,5 +1,5 @@
 # Websocket architecture
-For using the websocket, first start a spark application, then connect to ws://<host>/api/ws/tasks. It will send every new event to the websocket client. To compare it with the http version run the application, then call http:=/<host>/api/v1/applications. There will be an application-id, call http://<host>/api/v1/applications/<app-id>/0/tasks/0. It will give back every event from the app so far.
+For using the websocket, first start a spark application, then connect to ws://<<host>>/api/ws/tasks. It will send every new event to the websocket client. To compare it with the http version run the application, then call http:=/<<host>>/api/v1/applications. There will be an application-id, call http://<<host>>/api/v1/applications/<app-id>/0/tasks/0. It will give back every event from the app so far.
 
 
 # Apache Spark
