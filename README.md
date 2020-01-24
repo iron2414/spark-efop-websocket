@@ -1,3 +1,8 @@
+Founded by EFOP-3.6.3-VEKOP-16-2017-00002.
+„Integrált kutatói utánpótlás-képzési program az informatika és számítástudomány diszciplináris területein”
+
+This is an Apache Spark with a websocket server added for task events.
+
 # Websocket architecture
 For using the websocket, first start a spark application, then connect to ws://"host"/api/ws/tasks. It will send every new event to the websocket client.
 You can see the "host" when you start the application, if you run it locally it's ussualy localhost:4040.
